@@ -1,0 +1,49 @@
+{
+  "id": "nxp-m68000-prm",
+  "title": "M68000 Family Programmer's Reference Manual (Includes CPU32 Instructions)",
+  "kind": "manual",
+  "language": "en",
+  "publisher": "Motorola",
+  "provider": "NXP Semiconductors",
+  "publication_year": 1992,
+  "document_number": "M68000PRM",
+  "url": "https://www.nxp.com/docs/en/reference-manual/M68000PRM.pdf",
+  "retrieved_date": "2026-11-18",
+  "license": "all-rights-reserved",
+  "usage": "local-reference",
+  "redistribution": "not-authorized",
+  "review_status": "unreviewed_extracted_text",
+  "topics": [
+    "instruction-set",
+    "addressing-modes",
+    "condition-codes",
+    "cpu32"
+  ],
+  "cpu_scope_note": "68000ファミリーおよびCPU32の資料。各命令・モードの対応CPUを本文で確認すること。検索ヒットだけでMC68000対応とは判断しない。",
+  "pagination_note": "章ごとの印刷ページ表記を持つため、単純なオフセットを使わずPDFの1始まりページ位置を引用する。",
+  "content_guide": [
+    {
+      "topic": "Instruction semantics, encodings, addressing modes and supported CPU variants",
+      "note": "This family programmer reference includes CPU32; check each instruction CPU scope. For MC68000 execution cycles, consult nxp-m68000-um Section 8 (PDF117-127), not an arbitrary instruction-description page.",
+      "related_source_id": "nxp-m68000-um"
+    },
+    {
+      "topic": "Bcc integer conditional branch mnemonics and displacement sizes",
+      "pdf_pages": [
+        129
+      ],
+      "note": "The Bcc instruction defines cc condition mnemonics, including NE. Verify mnemonic and CPU size scope here; MC68000 execution timing remains in nxp-m68000-um Section 8.",
+      "keywords": [
+        "Bcc",
+        "BNE",
+        "BEQ",
+        "NE",
+        "EQ",
+        "条件分岐",
+        "条件コード",
+        "変位サイズ"
+      ]
+    }
+  ],
+  "content_guide_review": "AI-checked section headings/page positions; not human reviewed. Navigation only; verify claims against the actual pages."
+}

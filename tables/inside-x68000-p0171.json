@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "source_id": "inside-x68000",
+  "source_sha256": "160cf749ece4d9812db3d07961a95cb59858d7a3925e58b760fc7e7ca9b84c03",
+  "pdf_page": 171,
+  "origin_label": "表1",
+  "review_status": "image_checked_by_ai_not_human_reviewed",
+  "review_method": "Codex が PDF 171ページの原本画像を見て、表1の行・列・結合セルと凡例を照合。人手による査読は未実施。",
+  "scope_note": "グラフィック画面の表1のみ。実画面（VRAM構成）と表示解像度、水平走査周波数、ソフトウェアサポートを区別する。",
+  "notes": [
+    "結合セルは各対象行に展開した。色数とページ数は表示解像度との一対一対応ではない。",
+    "hardware=true はCRTC等で設定可能という意味。software=false はハードウェア非対応とは異なる。",
+    "走査方式の「表に特記事項なし」は表の記載状況であり、未記載の仕様を検証したことを意味しない。"
+  ],
+  "tables": [
+    {
+      "id": "graphics-display-modes",
+      "title": "対応するグラフィック画面モード：表示解像度・走査条件・ソフトウェアサポート",
+      "columns": [
+        {
+          "key": "display",
+          "label": "表示解像度（ドット）"
+        },
+        {
+          "key": "horizontal_khz",
+          "label": "水平走査周波数（kHz）"
+        },
+        {
+          "key": "scan",
+          "label": "走査方式の注記"
+        },
+        {
+          "key": "hardware",
+          "label": "ハードウェア設定可否"
+        },
+        {
+          "key": "software",
+          "label": "X-BASIC・XCライブラリ・IOCSのサポート"
+        }
+      ],
+      "rows": [
+        {
+          "display": "768×512",
+          "horizontal_khz": 31,
+          "scan": "表に特記事項なし",
+          "hardware": true,
+          "software": true
+        },
+        {
+          "display": "768×512",
+          "horizontal_khz": 15,
+          "scan": null,
+          "hardware": false,
+          "software": false
+        },
+        {
+          "display": "512×512",
+          "horizontal_khz": 31,
+          "scan": "表に特記事項なし",
+          "hardware": true,
+          "software": true
+        },
+        {
+          "display": "512×512",
+          "horizontal_khz": 15,
+          "scan": "インターレース",
+          "hardware": true,
+          "software": true
+        },
+        {
+          "display": "512×256",
+          "horizontal_khz": 31,
+          "scan": "二度読み",
+          "hardware": true,
+          "software": false
+        },
+        {
+          "display": "512×256",
+          "horizontal_khz": 15,
+          "scan": "表に特記事項なし",
+          "hardware": true,
+          "software": false
+        },
+        {
+          "display": "256×256",
+          "horizontal_khz": 31,
+          "scan": "二度読み",
+          "hardware": true,
+          "software": true
+        },
+        {
+          "display": "256×256",
+          "horizontal_khz": 15,
+          "scan": "表に特記事項なし",
+          "hardware": true,
+          "software": true
+        }
+      ]
+    },
+    {
+      "id": "graphics-vram-configurations",
+      "title": "グラフィック実画面（VRAM）の構成・色数・ページ数",
+      "columns": [
+        {
+          "key": "virtual_screen",
+          "label": "実画面（VRAM構成、ドット）"
+        },
+        {
+          "key": "colors",
+          "label": "色数",
+          "unit": "色"
+        },
+        {
+          "key": "pages",
+          "label": "ページ数",
+          "unit": "ページ"
+        },
+        {
+          "key": "display_sizes",
+          "label": "この構成で使う表示解像度（走査条件は別表）"
+        }
+      ],
+      "rows": [
+        {
+          "virtual_screen": "1024×1024",
+          "colors": 16,
+          "pages": 1,
+          "display_sizes": [
+            "768×512",
+            "512×512",
+            "512×256",
+            "256×256"
+          ]
+        },
+        {
+          "virtual_screen": "512×512",
+          "colors": 65536,
+          "pages": 1,
+          "display_sizes": [
+            "512×512",
+            "512×256",
+            "256×256"
+          ]
+        },
+        {
+          "virtual_screen": "512×512",
+          "colors": 256,
+          "pages": 2,
+          "display_sizes": [
+            "512×512",
+            "512×256",
+            "256×256"
+          ]
+        },
+        {
+          "virtual_screen": "512×512",
+          "colors": 16,
+          "pages": 4,
+          "display_sizes": [
+            "512×512",
+            "512×256",
+            "256×256"
+          ]
+        }
+      ]
+    }
+  ]
+}

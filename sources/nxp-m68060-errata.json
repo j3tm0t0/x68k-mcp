@@ -1,0 +1,33 @@
+{
+  "kind": "manual",
+  "language": "en",
+  "publisher": "Motorola",
+  "provider": "NXP Semiconductors",
+  "retrieved_date": "2026-11-18",
+  "license": "all-rights-reserved",
+  "usage": "reference",
+  "redistribution": "not-authorized",
+  "review_status": "unreviewed_extracted_text",
+  "id": "nxp-m68060-errata",
+  "title": "MC68060 Production Device Errata, Revision 4.0 (18 October 1996)",
+  "publication_year": 1996,
+  "revision": "4.0",
+  "document_number": "MC68060DE",
+  "url": "https://www.nxp.com/docs/en/errata/MC68060DE.pdf",
+  "topics": [
+    "68060",
+    "errata",
+    "masksets",
+    "workarounds",
+    "fpu",
+    "cache",
+    "mmu"
+  ],
+  "authority_role": "device-errata",
+  "related_source_ids": [
+    "nxp-m68060-um",
+    "nxp-m68060-umad"
+  ],
+  "cpu_scope_note": "1996-10-18 Rev 4.0のデバイスエラッタ。適用はMC68060/MC68LC060/MC68EC060とマスクセットによって異なる。先頭ページの適用表を確認し、すべての68060に全項目が該当するとは判断しない。",
+  "pagination_note": "PDFの1始まりページ位置を引用する。印刷ページの一律オフセットは設定しない。"
+}

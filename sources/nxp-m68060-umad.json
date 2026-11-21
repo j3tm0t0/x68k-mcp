@@ -1,0 +1,26 @@
+{
+  "kind": "manual",
+  "language": "en",
+  "publisher": "Motorola",
+  "provider": "NXP Semiconductors",
+  "retrieved_date": "2026-11-18",
+  "license": "all-rights-reserved",
+  "usage": "reference",
+  "redistribution": "not-authorized",
+  "review_status": "unreviewed_extracted_text",
+  "id": "nxp-m68060-umad",
+  "title": "MC68060 User Manual Addendum, Revision 0.1 (25 March 1998)",
+  "publication_year": 1998,
+  "revision": "0.1",
+  "document_number": "MC68060UMAD/AD",
+  "url": "https://www.nxp.com/docs/en/reference-manual/MC68060UMAD.pdf",
+  "topics": [
+    "68060",
+    "manual-corrections",
+    "package"
+  ],
+  "authority_role": "manual-addendum",
+  "corrects_source_id": "nxp-m68060-um",
+  "cpu_scope_note": "MC68060 User Manualの追補。本文記載のRevision 0.1を採用。原マニュアルの該当事項と併読し、パッケージ等の訂正を優先する。CPUのデバイス不具合一覧は別資料 nxp-m68060-errata を参照。",
+  "pagination_note": "PDFの1始まりページ位置を引用する。印刷ページの一律オフセットは設定しない。"
+}

@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "source_id": "nxp-m68000-um",
+  "source_sha256": "89b690b1923f8a3cff508567090bcab0bcd07511c2deff8ffa393a08efda18e1",
+  "pdf_page": 120,
+  "origin_label": "Table 8-4 Standard Instruction Execution Times, MULU row and footnotes",
+  "review_status": "image_checked_by_ai_not_human_reviewed",
+  "review_method": "CodexがPDF120の原本画像でMULUの70(1/0)+*、最大値の脚注、38+2nとnの定義、Word EA加算を照合。例は式から導出したもので原本の例の転記ではない。人手校正ではない。",
+  "scope_note": "MC68000等の16-bit mode Section8の符号なしWord乗算MULU。MULSの符号付き遷移数やMC68010/68008のタイミング表と混同しない。基本時間とEA加算・追加ウェイトを区別する。入力例は数式からの導出。",
+  "notes": [
+    "Table8-4のMULU欄70(1/0)+*は最大基本値であり、全入力で70クロックという意味ではない。",
+    "MULUの基本時間=38+2n。nはソース<ea>の16ビット中の1の個数。結果Dnのビット数やMULSの01/10遷移数ではない。",
+    "脚注+はEA加算、*はWord用EA時間に加える最大基本値。MULU.WはソースWordのEA時間を使う。結果が32ビットでもLong用EAを加えない。EA値はTable8-1（PDF118）。",
+    "入力例表のsource_wordとpopcount16からbase_clock_periodsを計算した。EA・追加ウェイトをまだ含まない基本時間の例であり、全命令時間の固定表ではない。"
+  ],
+  "tables": [
+    {
+      "id": "m68000-mulu-timing-formula",
+      "title": "MC68000 MULU.W data-dependent instruction cycles 乗算の可変基本時間と最大値",
+      "columns": [
+        {
+          "key": "instruction",
+          "label": "命令"
+        },
+        {
+          "key": "source_bits",
+          "label": "ソース幅",
+          "unit": "bit"
+        },
+        {
+          "key": "result_bits",
+          "label": "結果幅",
+          "unit": "bit"
+        },
+        {
+          "key": "base_clock_formula",
+          "label": "基本クロック式"
+        },
+        {
+          "key": "n_definition",
+          "label": "nの意味"
+        },
+        {
+          "key": "minimum_base_clocks",
+          "label": "最小基本クロック"
+        },
+        {
+          "key": "maximum_base_clocks",
+          "label": "最大基本クロック"
+        },
+        {
+          "key": "table_entry",
+          "label": "原本表の最大値表記"
+        },
+        {
+          "key": "additional_time",
+          "label": "別途加える時間"
+        }
+      ],
+      "rows": [
+        {
+          "instruction": "MULU.W <ea>,Dn",
+          "source_bits": 16,
+          "result_bits": 32,
+          "base_clock_formula": "38 + 2*n",
+          "n_definition": "ソースWordの1ビットの個数（popcount16、0〜16）",
+          "minimum_base_clocks": 38,
+          "maximum_base_clocks": 70,
+          "table_entry": "70(1/0)+*（最大値。固定時間ではない）",
+          "additional_time": "WordオペランドのEA時間 + 追加ウェイト"
+        }
+      ]
+    },
+    {
+      "id": "m68000-mulu-derived-examples",
+      "title": "MC68000 MULU 基本時間の計算例（式からの導出、EAとウェイトは別）",
+      "columns": [
+        {
+          "key": "source_word",
+          "label": "ソースWordの例"
+        },
+        {
+          "key": "popcount16",
+          "label": "1の個数n"
+        },
+        {
+          "key": "base_clock_periods",
+          "label": "基本クロック数"
+        },
+        {
+          "key": "calculation",
+          "label": "計算（導出）"
+        }
+      ],
+      "rows": [
+        {
+          "source_word": "$0000",
+          "popcount16": 0,
+          "base_clock_periods": 38,
+          "calculation": "38 + 2*0 = 38（EAと追加ウェイトは別）"
+        },
+        {
+          "source_word": "$0001",
+          "popcount16": 1,
+          "base_clock_periods": 40,
+          "calculation": "38 + 2*1 = 40（EAと追加ウェイトは別）"
+        },
+        {
+          "source_word": "$8000",
+          "popcount16": 1,
+          "base_clock_periods": 40,
+          "calculation": "38 + 2*1 = 40（EAと追加ウェイトは別）"
+        },
+        {
+          "source_word": "$5555",
+          "popcount16": 8,
+          "base_clock_periods": 54,
+          "calculation": "38 + 2*8 = 54（EAと追加ウェイトは別）"
+        },
+        {
+          "source_word": "$AAAA",
+          "popcount16": 8,
+          "base_clock_periods": 54,
+          "calculation": "38 + 2*8 = 54（EAと追加ウェイトは別）"
+        },
+        {
+          "source_word": "$FFFF",
+          "popcount16": 16,
+          "base_clock_periods": 70,
+          "calculation": "38 + 2*16 = 70（EAと追加ウェイトは別）"
+        }
+      ]
+    }
+  ]
+}

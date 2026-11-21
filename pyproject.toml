@@ -1,0 +1,13 @@
+[project]
+name = "x68k-knowledge"
+version = "0.1.0"
+description = "Source-cited X68000 knowledge search and MCP tools"
+requires-python = ">=3.11"
+dependencies = ["mcp>=1.20,<2"]
+
+[project.scripts]
+x68k-knowledge = "x68k_knowledge.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

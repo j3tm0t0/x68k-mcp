@@ -1,0 +1,34 @@
+{
+  "id": "gorry-ts6bga-notes",
+  "title": "TS-6BGA 開発メモ（GORRY 開発ページに基づく整理）",
+  "kind": "web-notes",
+  "language": "ja",
+  "author": "GORRY / Hiroaki Goto (upstream)",
+  "provider": "GORRY website",
+  "url": "https://gorry.haun.org/ts6bga.html",
+  "retrieved_date": "2026-11-18",
+  "upstream_snapshot_sha256": "8fa1b8a5d07868ffa3923f959c138bcd94ce39e82472c0399bed2739dc98031d",
+  "license": "upstream-rights-reserved; technical source notes",
+  "usage": "reference",
+  "review_status": "source_checked_notes",
+  "authority_role": "developer-beta-observations",
+  "part_numbers": [
+    "TS-6BGA",
+    "GD-5434",
+    "PCM69"
+  ],
+  "topics": [
+    "graphics-accelerator",
+    "VRAM",
+    "bank-switch",
+    "PCM",
+    "IOCS",
+    "TS6BGAG.X",
+    "display-modes",
+    "resolution",
+    "colors"
+  ],
+  "scope_note": "GORRYによるベータ版開発記録の整理。ハードウェアはベータ版、IOCSドライバ仕様は1996-06-23時点。製品版の仕様保証とは区別する。未説明のDMASTARTビットや24kHzの対応は推測しない。",
+  "notice": "開発者ページのベータ版情報に基づく整理。製品版・現行仕様とは区別し、詳細は出典で確認する。",
+  "provenance_note": "原文HTMLの転載ではなく、出典に基づく技術メモ。原文HTML取得時点のハッシュと、ノート自体のハッシュを分けて保存。ページ上部のLast update表示は内容の版日付として採用しない。"
+}

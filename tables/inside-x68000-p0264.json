@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "source_id": "inside-x68000",
+  "source_sha256": "160cf749ece4d9812db3d07961a95cb59858d7a3925e58b760fc7e7ca9b84c03",
+  "pdf_page": 264,
+  "origin_label": "図1 サウンド系のブロック図（印刷260ページ）",
+  "review_status": "image_checked_by_ai_not_human_reviewed",
+  "review_method": "CodexがPDF264の原本画像でADPCMパンポット付近の4.7K・1.5K・2.2K表記と位置を照合。人手の校正ではない。",
+  "scope_note": "Inside X68000 図1のADPCMパンポット周辺に印字された抵抗値だけを扱う。全機種の基板実装、部品番号、LPF特性や実測応答を確認したものではない。",
+  "notes": [
+    "PPI PC0/PC1のプルアップ部の図中表記は4.7K。ADPCM出力側の上段2本は各1.5K、その下段2本は各2.2K。",
+    "OCRではこの箇所の小数点が落ち、4.7Kが47K、1.5Kが15K、2.2Kが22Kと抽出されている。位置を対応付けて原本画像で確認した値を使う。",
+    "同じ図の別の場所には実際に47K（LINE IN側）や22K（LINE OUT/TV AUDIO付近）の表記もある。全47K/22Kを機械的に小数点付きへ置き換えない。",
+    "バッファ内部や実機全体の詳細回路・周波数応答はこの表からは分からない。これらの抵抗値だけでX68000の出力LPFカットオフを算出・断定しない。"
+  ],
+  "tables": [
+    {
+      "id": "sound-adpcm-pan-resistors",
+      "title": "サウンド系ブロック図 ADPCMパンポットとPPI付近の抵抗値（小数点照合済み）",
+      "columns": [
+        {
+          "key": "location",
+          "label": "図中の箇所"
+        },
+        {
+          "key": "resistance_ohms",
+          "label": "抵抗値",
+          "unit": "Ω"
+        },
+        {
+          "key": "display_value",
+          "label": "kΩ表記"
+        },
+        {
+          "key": "figure_label",
+          "label": "原本の表記・位置"
+        }
+      ],
+      "rows": [
+        {
+          "location": "PPI PC0/PC1側のVCCIプルアップ部",
+          "resistance_ohms": 4700,
+          "display_value": "4.7 kΩ",
+          "figure_label": "プルアップ部に4.7Kと記載"
+        },
+        {
+          "location": "ADPCM出力側の上段の2本",
+          "resistance_ohms": 1500,
+          "display_value": "1.5 kΩ（各抵抗）",
+          "figure_label": "ADPCM出力バッファから分岐する2本にそれぞれ1.5Kと記載"
+        },
+        {
+          "location": "上段1.5Kの下に描かれた下段の2本",
+          "resistance_ohms": 2200,
+          "display_value": "2.2 kΩ（各抵抗）",
+          "figure_label": "FM出力との合流側に向かう2本にそれぞれ2.2Kと記載"
+        }
+      ]
+    }
+  ]
+}

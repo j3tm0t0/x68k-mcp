@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "source_id": "inside-x68000",
+  "source_sha256": "160cf749ece4d9812db3d07961a95cb59858d7a3925e58b760fc7e7ca9b84c03",
+  "pdf_page": 237,
+  "origin_label": "図54（R20のアドレスと連動範囲のみ）",
+  "review_status": "image_checked_by_ai_not_human_reviewed",
+  "review_method": "Codex がPDF 237ページの原本画像の図と、PDF235・238ページの説明を照合。人手による査読は未実施。",
+  "scope_note": "CRTC R20とビデオコントローラR0のアドレス、上位・下位バイトの役割、同期対象のビット範囲。図53のタイミング計算式と、図54の個別SIZ/COLビット番号は今回の構造化対象外。",
+  "notes": [
+    "CRTC R20のbit8〜10とビデオコントローラR0のbit0〜2（下位3ビット）を一致させる。R20のbit0〜7をR0へ合わせるという意味ではない。",
+    "R20のbit8〜10は、上位バイト（bit8〜15）の下位3ビットである。16ビット全体の上位3ビット（bit13〜15）ではない。「R20の上位3ビット」と省略すると誤解を招くため、範囲をbit8〜10と明記する。",
+    "CRTC R20は上位バイトで実画面サイズ・色モード、下位バイトで水平走査周波数・表示画面の垂直/水平ドット数を設定する（本文PDF235）。",
+    "OCRで図54のアドレスが$E80020と抽出されていたが、原本画像の表記は$E80028。",
+    "図54のSIZ/COLに付いた個別ビット番号は図の並びとの整合性に未解決点があるため、この注釈では個別ビット割り当てを確定しない。原本にある疑問点とOCR誤認を区別する。"
+  ],
+  "tables": [
+    {
+      "id": "crtc-video-register-synchronization",
+      "title": "CRTC R20 とビデオコントローラ R0 レジスタのアドレス・ビット同期（一致させる範囲）",
+      "columns": [
+        {
+          "key": "register",
+          "label": "レジスタ"
+        },
+        {
+          "key": "address",
+          "label": "アドレス"
+        },
+        {
+          "key": "purpose",
+          "label": "役割"
+        },
+        {
+          "key": "bits",
+          "label": "同期対象ビット"
+        },
+        {
+          "key": "counterpart",
+          "label": "一致させる相手"
+        }
+      ],
+      "rows": [
+        {
+          "register": "CRTC R20",
+          "address": "$E80028",
+          "purpose": "上位バイトは実画面サイズ・色モード。下位バイトは走査周波数・表示ドット数。",
+          "bits": [
+            "8",
+            "9",
+            "10"
+          ],
+          "counterpart": "ビデオコントローラR0 bit0〜2"
+        },
+        {
+          "register": "ビデオコントローラ R0（Rゼロ、OCRではROとも表記）",
+          "address": "$E82400",
+          "purpose": "下位3ビットで実画面サイズ・色モードを選ぶ。",
+          "bits": [
+            "0",
+            "1",
+            "2"
+          ],
+          "counterpart": "CRTC R20 bit8〜10"
+        }
+      ]
+    }
+  ]
+}

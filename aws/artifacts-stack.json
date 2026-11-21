@@ -1,0 +1,18 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Private deployment artifacts for the x68k-mcp Lambda",
+  "Resources": {
+    "Artifacts": {
+      "Type": "AWS::S3::Bucket",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "BucketName": {"Fn::Sub": "x68k-knowledge-artifacts-${AWS::AccountId}-${AWS::Region}"},
+        "PublicAccessBlockConfiguration": {"BlockPublicAcls": true, "IgnorePublicAcls": true, "BlockPublicPolicy": true, "RestrictPublicBuckets": true},
+        "BucketEncryption": {"ServerSideEncryptionConfiguration": [{"ServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}]},
+        "Tags": [{"Key": "Project", "Value": "x68k-mcp"}]
+      }
+    }
+  },
+  "Outputs": {"BucketName": {"Value": {"Ref": "Artifacts"}}}
+}

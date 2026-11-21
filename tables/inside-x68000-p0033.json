@@ -1,0 +1,300 @@
+{
+  "schema_version": 1,
+  "source_id": "inside-x68000",
+  "source_sha256": "160cf749ece4d9812db3d07961a95cb59858d7a3925e58b760fc7e7ca9b84c03",
+  "pdf_page": 33,
+  "origin_label": "図3・本文PDF32",
+  "review_status": "image_checked_by_ai_not_human_reviewed",
+  "review_method": "CodexがPDF33ページ図3の原本画像で基底アドレス、左右バイト位置、レジスタ占有範囲、GCRの脚注を照合。本文PDF32も参照。各絶対アドレスは図の基底とオフセットの加算で導出。人手の査読は未実施。",
+  "scope_note": "X68000搭載DMAC HD63450のレジスタ配置。アクセス方法、実装される有効ビット数、個別ビットの機能・書き込み副作用はこの図だけから確定しない。",
+  "notes": [
+    "絶対アドレス=チャンネル基底+オフセット。チャンネル0=$E84000、チャンネル1=$E84040、チャンネル2=$E84080、チャンネル3=$E840C0。",
+    "GCRは$E840FFに1個だけあり、他のチャンネルの+3FにGCRがあるとは解釈しない。",
+    "バイト数は図でのアドレス空間の占有幅であり、全ビットが有効、あるいは任意の幅で読み書き可能という意味ではない。",
+    "図の右側のCER/OCR/CCR/NIV/EIV/MFC/CPR/DFC/BFC/GCRは奇数アドレス。左側CSR/DCR/SCRは偶数アドレス。",
+    "OCRテキストでは多くのレジスタ名が欠落し、脚注GCRがCCRと抽出されていたが、原本脚注はGCRがチャンネル3だけにあると記している。"
+  ],
+  "tables": [
+    {
+      "id": "dmac-channel-bases",
+      "title": "DMAC HD63450 チャンネルの基底アドレス",
+      "columns": [
+        {
+          "key": "channel",
+          "label": "チャンネル"
+        },
+        {
+          "key": "base",
+          "label": "基底アドレス"
+        },
+        {
+          "key": "stride",
+          "label": "次チャンネルまでの間隔"
+        }
+      ],
+      "rows": [
+        {
+          "channel": 0,
+          "base": "$E84000",
+          "stride": "$40"
+        },
+        {
+          "channel": 1,
+          "base": "$E84040",
+          "stride": "$40"
+        },
+        {
+          "channel": 2,
+          "base": "$E84080",
+          "stride": "$40"
+        },
+        {
+          "channel": 3,
+          "base": "$E840C0",
+          "stride": "$40"
+        }
+      ]
+    },
+    {
+      "id": "dmac-register-address-map",
+      "title": "DMAC HD63450 レジスタ一覧：MTC MAR DAR と GCR 等のチャンネル別アドレス・オフセット",
+      "columns": [
+        {
+          "key": "register",
+          "label": "レジスタ"
+        },
+        {
+          "key": "offset",
+          "label": "基底からのオフセット"
+        },
+        {
+          "key": "allocated_bytes",
+          "label": "図での占有バイト数"
+        },
+        {
+          "key": "addresses",
+          "label": "チャンネル別の絶対アドレス"
+        },
+        {
+          "key": "scope",
+          "label": "適用範囲・例外"
+        }
+      ],
+      "rows": [
+        {
+          "register": "CSR",
+          "offset": "$00",
+          "allocated_bytes": 1,
+          "addresses": [
+            "チャンネル0=$E84000",
+            "チャンネル1=$E84040",
+            "チャンネル2=$E84080",
+            "チャンネル3=$E840C0"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "CER",
+          "offset": "$01",
+          "allocated_bytes": 1,
+          "addresses": [
+            "チャンネル0=$E84001",
+            "チャンネル1=$E84041",
+            "チャンネル2=$E84081",
+            "チャンネル3=$E840C1"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "DCR",
+          "offset": "$04",
+          "allocated_bytes": 1,
+          "addresses": [
+            "チャンネル0=$E84004",
+            "チャンネル1=$E84044",
+            "チャンネル2=$E84084",
+            "チャンネル3=$E840C4"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "OCR",
+          "offset": "$05",
+          "allocated_bytes": 1,
+          "addresses": [
+            "チャンネル0=$E84005",
+            "チャンネル1=$E84045",
+            "チャンネル2=$E84085",
+            "チャンネル3=$E840C5"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "SCR",
+          "offset": "$06",
+          "allocated_bytes": 1,
+          "addresses": [
+            "チャンネル0=$E84006",
+            "チャンネル1=$E84046",
+            "チャンネル2=$E84086",
+            "チャンネル3=$E840C6"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "CCR",
+          "offset": "$07",
+          "allocated_bytes": 1,
+          "addresses": [
+            "チャンネル0=$E84007",
+            "チャンネル1=$E84047",
+            "チャンネル2=$E84087",
+            "チャンネル3=$E840C7"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "MTC",
+          "offset": "$0A",
+          "allocated_bytes": 2,
+          "addresses": [
+            "チャンネル0=$E8400A",
+            "チャンネル1=$E8404A",
+            "チャンネル2=$E8408A",
+            "チャンネル3=$E840CA"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "MAR",
+          "offset": "$0C",
+          "allocated_bytes": 4,
+          "addresses": [
+            "チャンネル0=$E8400C",
+            "チャンネル1=$E8404C",
+            "チャンネル2=$E8408C",
+            "チャンネル3=$E840CC"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "DAR",
+          "offset": "$14",
+          "allocated_bytes": 4,
+          "addresses": [
+            "チャンネル0=$E84014",
+            "チャンネル1=$E84054",
+            "チャンネル2=$E84094",
+            "チャンネル3=$E840D4"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "BTC",
+          "offset": "$1A",
+          "allocated_bytes": 2,
+          "addresses": [
+            "チャンネル0=$E8401A",
+            "チャンネル1=$E8405A",
+            "チャンネル2=$E8409A",
+            "チャンネル3=$E840DA"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "BAR",
+          "offset": "$1C",
+          "allocated_bytes": 4,
+          "addresses": [
+            "チャンネル0=$E8401C",
+            "チャンネル1=$E8405C",
+            "チャンネル2=$E8409C",
+            "チャンネル3=$E840DC"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "NIV",
+          "offset": "$25",
+          "allocated_bytes": 1,
+          "addresses": [
+            "チャンネル0=$E84025",
+            "チャンネル1=$E84065",
+            "チャンネル2=$E840A5",
+            "チャンネル3=$E840E5"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "EIV",
+          "offset": "$27",
+          "allocated_bytes": 1,
+          "addresses": [
+            "チャンネル0=$E84027",
+            "チャンネル1=$E84067",
+            "チャンネル2=$E840A7",
+            "チャンネル3=$E840E7"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "MFC",
+          "offset": "$29",
+          "allocated_bytes": 1,
+          "addresses": [
+            "チャンネル0=$E84029",
+            "チャンネル1=$E84069",
+            "チャンネル2=$E840A9",
+            "チャンネル3=$E840E9"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "CPR",
+          "offset": "$2D",
+          "allocated_bytes": 1,
+          "addresses": [
+            "チャンネル0=$E8402D",
+            "チャンネル1=$E8406D",
+            "チャンネル2=$E840AD",
+            "チャンネル3=$E840ED"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "DFC",
+          "offset": "$31",
+          "allocated_bytes": 1,
+          "addresses": [
+            "チャンネル0=$E84031",
+            "チャンネル1=$E84071",
+            "チャンネル2=$E840B1",
+            "チャンネル3=$E840F1"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "BFC",
+          "offset": "$39",
+          "allocated_bytes": 1,
+          "addresses": [
+            "チャンネル0=$E84039",
+            "チャンネル1=$E84079",
+            "チャンネル2=$E840B9",
+            "チャンネル3=$E840F9"
+          ],
+          "scope": "チャンネル0〜3にそれぞれ存在"
+        },
+        {
+          "register": "GCR",
+          "offset": "$3F",
+          "allocated_bytes": 1,
+          "addresses": [
+            "チャンネル3=$E840FF"
+          ],
+          "scope": "チャンネル3の位置に1個だけ存在し、DMAC全体に関係する設定"
+        }
+      ]
+    }
+  ]
+}

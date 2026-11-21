@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "source_id": "nxp-m68000-um",
+  "source_sha256": "89b690b1923f8a3cff508567090bcab0bcd07511c2deff8ffa393a08efda18e1",
+  "pdf_page": 118,
+  "origin_label": "Table 8-1; operand-size footnote in Table 8-4 PDF120",
+  "review_status": "image_checked_by_ai_not_human_reviewed",
+  "review_method": "CodexがPDF118 Table8-1原本画像のByte/WordとLong、クロック数・read/write数、脚注を照合。PDF117の定義とPDF120 Table8-4のWord EA脚注も参照。人手校正ではない。",
+  "scope_note": "MC68000/MC68HC000/MC68HC001/MC68EC000の16-bit mode、Section8のEA時間。MC68010のTable9-1ではない。Byte/WordとLongはEA参照対象のオペランドサイズ。MULUではWordソースのサイズを使い、32ビットの演算結果サイズを使わない。追加ウェイトは別途。",
+  "notes": [
+    "各行はアドレス方式とソースオペランドサイズを結び付ける。レジスタ直接Dn/Anは0、(An)はByte/Wordが4、Longが8クロック。",
+    "MULU/MULSのTable8-4（PDF120）脚注はWord用の実効アドレス時間を加算すると記す。MULU.Wの結果が32ビットでも、WordソースのEA時間を使う。",
+    "EA時間は拡張ワードの読み出し、アドレス計算、メモリオペランドの取得を含む（PDF117）。表中read/writeはバスサイクルの回数。",
+    "Table8-1脚注: インデックスレジスタXnのサイズはこの実行時間に影響しない。",
+    "ここでは数値を図表から構造化した。メモリ・機種固有のウェイトやバス競合まで校正・検証したという意味ではない。"
+  ],
+  "tables": [
+    {
+      "id": "m68000-effective-address-times",
+      "title": "MC68000 effective address calculation times 実効アドレス時間（Table8-1）",
+      "columns": [
+        {
+          "key": "addressing_mode",
+          "label": "アドレス方式"
+        },
+        {
+          "key": "operand_size",
+          "label": "オペランドサイズ（EA参照対象）"
+        },
+        {
+          "key": "clock_periods",
+          "label": "クロック数"
+        },
+        {
+          "key": "read_cycles",
+          "label": "readバスサイクル回数"
+        },
+        {
+          "key": "write_cycles",
+          "label": "writeバスサイクル回数"
+        }
+      ],
+      "rows": [
+        {
+          "addressing_mode": "Dn",
+          "operand_size": "Byte/Word",
+          "clock_periods": 0,
+          "read_cycles": 0,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "Dn",
+          "operand_size": "Long",
+          "clock_periods": 0,
+          "read_cycles": 0,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "An",
+          "operand_size": "Byte/Word",
+          "clock_periods": 0,
+          "read_cycles": 0,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "An",
+          "operand_size": "Long",
+          "clock_periods": 0,
+          "read_cycles": 0,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(An)",
+          "operand_size": "Byte/Word",
+          "clock_periods": 4,
+          "read_cycles": 1,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(An)",
+          "operand_size": "Long",
+          "clock_periods": 8,
+          "read_cycles": 2,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(An)+",
+          "operand_size": "Byte/Word",
+          "clock_periods": 4,
+          "read_cycles": 1,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(An)+",
+          "operand_size": "Long",
+          "clock_periods": 8,
+          "read_cycles": 2,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "-(An)",
+          "operand_size": "Byte/Word",
+          "clock_periods": 6,
+          "read_cycles": 1,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "-(An)",
+          "operand_size": "Long",
+          "clock_periods": 10,
+          "read_cycles": 2,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(d16,An)",
+          "operand_size": "Byte/Word",
+          "clock_periods": 8,
+          "read_cycles": 2,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(d16,An)",
+          "operand_size": "Long",
+          "clock_periods": 12,
+          "read_cycles": 3,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(d8,An,Xn)",
+          "operand_size": "Byte/Word",
+          "clock_periods": 10,
+          "read_cycles": 2,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(d8,An,Xn)",
+          "operand_size": "Long",
+          "clock_periods": 14,
+          "read_cycles": 3,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(xxx).W",
+          "operand_size": "Byte/Word",
+          "clock_periods": 8,
+          "read_cycles": 2,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(xxx).W",
+          "operand_size": "Long",
+          "clock_periods": 12,
+          "read_cycles": 3,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(xxx).L",
+          "operand_size": "Byte/Word",
+          "clock_periods": 12,
+          "read_cycles": 3,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(xxx).L",
+          "operand_size": "Long",
+          "clock_periods": 16,
+          "read_cycles": 4,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(d16,PC)",
+          "operand_size": "Byte/Word",
+          "clock_periods": 8,
+          "read_cycles": 2,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(d16,PC)",
+          "operand_size": "Long",
+          "clock_periods": 12,
+          "read_cycles": 3,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(d8,PC,Xn)",
+          "operand_size": "Byte/Word",
+          "clock_periods": 10,
+          "read_cycles": 2,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "(d8,PC,Xn)",
+          "operand_size": "Long",
+          "clock_periods": 14,
+          "read_cycles": 3,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "#<data>",
+          "operand_size": "Byte/Word",
+          "clock_periods": 4,
+          "read_cycles": 1,
+          "write_cycles": 0
+        },
+        {
+          "addressing_mode": "#<data>",
+          "operand_size": "Long",
+          "clock_periods": 8,
+          "read_cycles": 2,
+          "write_cycles": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "source_id": "inside-x68000",
+  "source_sha256": "160cf749ece4d9812db3d07961a95cb59858d7a3925e58b760fc7e7ca9b84c03",
+  "pdf_page": 238,
+  "origin_label": "図55・本文5.2（ビデオコントローラR0）",
+  "review_status": "image_checked_by_ai_not_human_reviewed",
+  "review_method": "Codex がPDF 238ページの原本画像の図と、PDF235・238ページの説明を照合。人手による査読は未実施。",
+  "scope_note": "ビデオコントローラR0のSIZ/COLというフィールド単位の符号と意味。CRTC R20の個別フィールドへのビット番号割り当てや、フィールドを組み合わせた全設定の有効性は確定しない。スプライトコントローラの説明は今回の構造化対象外。",
+  "notes": [
+    "R0の下位3ビットはCRTC R20のbit8〜10と同じ値にする。R0のアドレスは$E82400、CRTC R20は$E80028。",
+    "OCRの図55見出しでは$E02400になっていたが、原本画像では$E82400。",
+    "下表の符号はフィールド内の2進数であり、レジスタ全体へそのまま書き込む値ではない。COLの10は16進の$10という意味ではない。",
+    "SIZ/COLの各フィールドの説明は、すべての組み合わせが使用可能という意味ではない。対応するVRAM構成と色数・ページ数はPDF171の構造化表を参照する。"
+  ],
+  "tables": [
+    {
+      "id": "video-r0-field-codes",
+      "title": "ビデオコントローラ R0（$E82400）のSIZ・COLフィールド：2進コードと色数・実画面サイズ",
+      "columns": [
+        {
+          "key": "field",
+          "label": "フィールド"
+        },
+        {
+          "key": "binary_code",
+          "label": "フィールド内の2進コード"
+        },
+        {
+          "key": "meaning",
+          "label": "意味"
+        },
+        {
+          "key": "definition",
+          "label": "図55での定義状態"
+        }
+      ],
+      "rows": [
+        {
+          "field": "SIZ",
+          "binary_code": "0",
+          "meaning": "実画面512×512ドット",
+          "definition": "記載あり"
+        },
+        {
+          "field": "SIZ",
+          "binary_code": "1",
+          "meaning": "実画面1024×1024ドット",
+          "definition": "記載あり"
+        },
+        {
+          "field": "COL",
+          "binary_code": "00",
+          "meaning": "16色モード",
+          "definition": "記載あり"
+        },
+        {
+          "field": "COL",
+          "binary_code": "01",
+          "meaning": "256色モード",
+          "definition": "記載あり"
+        },
+        {
+          "field": "COL",
+          "binary_code": "10",
+          "meaning": "未定義",
+          "definition": "図55では未定義。用途や動作を推測しない。"
+        },
+        {
+          "field": "COL",
+          "binary_code": "11",
+          "meaning": "65536色モード",
+          "definition": "記載あり"
+        }
+      ]
+    }
+  ]
+}

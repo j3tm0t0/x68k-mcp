@@ -1,0 +1,81 @@
+{
+  "kind": "manual",
+  "language": "en",
+  "retrieved_date": "2026-11-18",
+  "license": "all-rights-reserved",
+  "usage": "reference",
+  "redistribution": "not-authorized",
+  "review_status": "unreviewed_extracted_text",
+  "issue_repository": "j3tm0t0/pix68k-dev",
+  "pagination_note": "PDFの1始まりページ位置を引用する。印刷ページの一律オフセットは設定しない。",
+  "id": "oki-msm6258",
+  "title": "OKI MSM6258/MSM6258V ADPCM Speech Processor for Solid State Recorder",
+  "publisher": "OKI Semiconductor",
+  "provider": "elektronikjk.pl (manufacturer document mirror)",
+  "document_type": "datasheet",
+  "url": "https://www.elektronikjk.pl/elementy_czynne/IC/MSM6258.pdf",
+  "part_numbers": [
+    "MSM6258",
+    "MSM6258V"
+  ],
+  "related_issues": [
+    "https://github.com/j3tm0t0/pix68k-dev/issues/221"
+  ],
+  "topics": [
+    "ADPCM",
+    "DAC",
+    "ADC",
+    "filter",
+    "sampling",
+    "MPU-interface"
+  ],
+  "scope_note": "MSM6258/MSM6258Vのメーカー原本保存版。スタンドアロン版とMPUインタフェース版を区別する。内蔵変換器・外部変換器・フィルタの仕様を、X68000基板上のアナログ回路やホストのリサンプラの特性と混同しない。数値・図表は原本照合が必要。",
+  "provenance_note": "単独メーカー資料の保存版。PDFはABBYY OCRのテキスト層を含む。出版年・版は確証がないため未設定。",
+  "content_guide": [
+    {
+      "topic": "SAM1/SAM2 sampling frequency, oscillator divisors and invalid pin combination",
+      "pdf_pages": [
+        8
+      ],
+      "keywords": [
+        "サンプリング周波数",
+        "標本化周波数",
+        "分周比",
+        "サンプルレート",
+        "SAM1",
+        "SAM2"
+      ]
+    },
+    {
+      "topic": "External ADC/DAC, straight binary PCM and format limitations",
+      "pdf_pages": [
+        15
+      ],
+      "keywords": [
+        "外部DAC",
+        "外部ADC",
+        "PCM",
+        "u-law",
+        "A-law",
+        "G.721"
+      ]
+    },
+    {
+      "topic": "Application-circuit recommendations: oscillator, sampling rate and LPF cutoff",
+      "pdf_pages": [
+        38
+      ],
+      "note": "Chip application recommendations do not establish X68000 board-specific filter implementation.",
+      "keywords": [
+        "LPF",
+        "ローパスフィルタ",
+        "低域通過",
+        "カットオフ",
+        "フィルタ",
+        "発振",
+        "周波数"
+      ]
+    }
+  ],
+  "content_guide_review": "AI-checked section headings/page positions; not human reviewed. Navigation only; verify claims against the actual pages."
+}

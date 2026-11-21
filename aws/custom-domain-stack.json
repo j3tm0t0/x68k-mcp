@@ -1,0 +1,190 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Public X68000 native MCP HTTPS reverse proxy; no response caching",
+  "Parameters": {
+    "CertificateArn": {
+      "Type": "String",
+      "Default": ""
+    },
+    "DomainName": {
+      "Type": "String",
+      "Description": "Public MCP hostname, for example mcp.example.com"
+    },
+    "GatewayHostname": {
+      "Type": "String",
+      "Description": "AgentCore gateway hostname only, without scheme or /mcp"
+    }
+  },
+  "Conditions": {
+    "CustomDomainReady": {
+      "Fn::Not": [
+        {
+          "Fn::Equals": [
+            {
+              "Ref": "CertificateArn"
+            },
+            ""
+          ]
+        }
+      ]
+    }
+  },
+  "Resources": {
+    "Distribution": {
+      "Type": "AWS::CloudFront::Distribution",
+      "Properties": {
+        "DistributionConfig": {
+          "Enabled": true,
+          "Comment": "X68000 native MCP reverse proxy",
+          "IPV6Enabled": true,
+          "HttpVersion": "http2and3",
+          "PriceClass": "PriceClass_100",
+          "Aliases": {
+            "Fn::If": [
+              "CustomDomainReady",
+              [
+                {
+                  "Ref": "DomainName"
+                }
+              ],
+              {
+                "Ref": "AWS::NoValue"
+              }
+            ]
+          },
+          "ViewerCertificate": {
+            "Fn::If": [
+              "CustomDomainReady",
+              {
+                "AcmCertificateArn": {
+                  "Ref": "CertificateArn"
+                },
+                "SslSupportMethod": "sni-only",
+                "MinimumProtocolVersion": "TLSv1.2_2021"
+              },
+              {
+                "CloudFrontDefaultCertificate": true
+              }
+            ]
+          },
+          "Origins": [
+            {
+              "Id": "NativeGateway",
+              "DomainName": {
+                "Ref": "GatewayHostname"
+              },
+              "CustomOriginConfig": {
+                "OriginProtocolPolicy": "https-only",
+                "OriginSSLProtocols": [
+                  "TLSv1.2"
+                ],
+                "OriginReadTimeout": 60,
+                "OriginKeepaliveTimeout": 5
+              }
+            }
+          ],
+          "DefaultCacheBehavior": {
+            "TargetOriginId": "NativeGateway",
+            "ViewerProtocolPolicy": "https-only",
+            "AllowedMethods": [
+              "GET",
+              "HEAD",
+              "OPTIONS",
+              "PUT",
+              "PATCH",
+              "POST",
+              "DELETE"
+            ],
+            "CachedMethods": [
+              "GET",
+              "HEAD"
+            ],
+            "Compress": false,
+            "CachePolicyId": "4135ea2d-6df8-44a3-9df3-4b5a84be39ad",
+            "OriginRequestPolicyId": "b689b0a8-53d0-40ab-baf2-68738e2966ac"
+          },
+          "CustomErrorResponses": [
+            {
+              "ErrorCode": 400,
+              "ErrorCachingMinTTL": 0
+            },
+            {
+              "ErrorCode": 403,
+              "ErrorCachingMinTTL": 0
+            },
+            {
+              "ErrorCode": 404,
+              "ErrorCachingMinTTL": 0
+            },
+            {
+              "ErrorCode": 405,
+              "ErrorCachingMinTTL": 0
+            },
+            {
+              "ErrorCode": 414,
+              "ErrorCachingMinTTL": 0
+            },
+            {
+              "ErrorCode": 416,
+              "ErrorCachingMinTTL": 0
+            },
+            {
+              "ErrorCode": 500,
+              "ErrorCachingMinTTL": 0
+            },
+            {
+              "ErrorCode": 501,
+              "ErrorCachingMinTTL": 0
+            },
+            {
+              "ErrorCode": 502,
+              "ErrorCachingMinTTL": 0
+            },
+            {
+              "ErrorCode": 503,
+              "ErrorCachingMinTTL": 0
+            },
+            {
+              "ErrorCode": 504,
+              "ErrorCachingMinTTL": 0
+            }
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "x68k-knowledge"
+          }
+        ]
+      }
+    }
+  },
+  "Outputs": {
+    "DistributionId": {
+      "Value": {
+        "Ref": "Distribution"
+      }
+    },
+    "DistributionDomain": {
+      "Value": {
+        "Fn::GetAtt": [
+          "Distribution",
+          "DomainName"
+        ]
+      }
+    },
+    "McpUrl": {
+      "Value": {
+        "Fn::If": [
+          "CustomDomainReady",
+          {
+            "Fn::Sub": "https://${DomainName}/mcp"
+          },
+          {
+            "Fn::Sub": "https://${Distribution.DomainName}/mcp"
+          }
+        ]
+      }
+    }
+  }
+}

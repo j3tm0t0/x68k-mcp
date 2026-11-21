@@ -1,0 +1,45 @@
+{
+  "id": "zilog-scc-1992",
+  "title": "Zilog SCC/ESCC User's Manual (Q4/1992; includes Z8530)",
+  "kind": "manual",
+  "document_type": "user-manual",
+  "language": "en",
+  "publisher": "Zilog",
+  "provider": "Bitsavers (manufacturer document archive)",
+  "publication_year": 1992,
+  "edition": "Q4/92",
+  "url": "https://bitsavers.trailing-edge.com/components/zilog/_dataBooks/SCC_Users_Manual_1992.pdf",
+  "retrieved_date": "2026-11-18",
+  "license": "all-rights-reserved",
+  "usage": "reference",
+  "redistribution": "not-authorized",
+  "review_status": "unreviewed_ocr",
+  "part_numbers": [
+    "Z8030",
+    "Z8530",
+    "Z80C30",
+    "Z85C30",
+    "Z80230",
+    "Z85230",
+    "Z85233"
+  ],
+  "issue_repository": "j3tm0t0/pix68k-dev",
+  "related_issues": [
+    "https://github.com/j3tm0t0/pix68k-dev/issues/110"
+  ],
+  "topics": [
+    "SCC",
+    "RS-232C",
+    "serial",
+    "register-pointer",
+    "WR9",
+    "WR0",
+    "interrupts",
+    "CTS",
+    "DCD",
+    "baud-rate"
+  ],
+  "scope_note": "Q4/1992のZilogメーカー原本保存版。Z8530を含むが、CMOS SCCやESCCの拡張FIFO・拡張レジスタ・タイミングをNMOS Z8530に一律適用しない。チャネル共通の制御とチャネル別の状態を区別する。X68000のマウス配線やホストのUART/USBシリアル接続は別仕様。",
+  "provenance_note": "現行メーカーサイトの旧SCC PDFリンクが移転先へ転送されるため、Z8530を明記する1992年のメーカー原本保存版を使用。PDFの2ページ目にQ4/92表記。",
+  "pagination_note": "PDFの1始まりページ位置を引用する。章ごとの印刷ページに一律オフセットは設定しない。"
+}

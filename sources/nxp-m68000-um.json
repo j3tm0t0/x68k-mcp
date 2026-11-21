@@ -1,0 +1,167 @@
+{
+  "id": "nxp-m68000-um",
+  "title": "M68000 8-/16-/32-Bit Microprocessors User's Manual, Ninth Edition",
+  "kind": "manual",
+  "language": "en",
+  "publisher": "Motorola",
+  "provider": "NXP Semiconductors",
+  "publication_year": 1993,
+  "edition": "Ninth Edition",
+  "document_number": "MC68000UM",
+  "url": "https://www.nxp.com/docs/en/reference-manual/MC68000UM.pdf",
+  "retrieved_date": "2026-11-18",
+  "license": "all-rights-reserved",
+  "usage": "local-reference",
+  "redistribution": "not-authorized",
+  "review_status": "unreviewed_extracted_text",
+  "topics": [
+    "bus",
+    "exceptions",
+    "interrupts",
+    "timing",
+    "electrical-specifications"
+  ],
+  "cpu_scope_note": "MC68000だけでなくMC68008・MC68010・HC/EC系も扱う。CPUごとの信号・タイミング・例外フレーム差を確認すること。X68000の配線や周辺回路そのものの仕様ではない。",
+  "pagination_note": "章ごとの印刷ページ表記を持つため、単純なオフセットを使わずPDFの1始まりページ位置を引用する。",
+  "content_guide": [
+    {
+      "topic": "MC68000 / MC68HC000 / MC68HC001 / MC68EC000, 16-bit mode instruction execution times",
+      "section": "8",
+      "pdf_pages": [
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127
+      ],
+      "note": "Use Section 8 for MC68000. Section 7 is 8-bit mode MC68008; Section 9 is MC68010. Timings are clock periods; table notes and effective-address additions matter.",
+      "keywords": [
+        "命令実行時間",
+        "クロック数",
+        "サイクル",
+        "タイミング",
+        "16ビットバス"
+      ]
+    },
+    {
+      "topic": "MC68000 timing notation n(r/w), memory wait states",
+      "pdf_pages": [
+        117
+      ],
+      "keywords": [
+        "命令フェッチ",
+        "ウェイト",
+        "バスサイクル",
+        "クロック数"
+      ]
+    },
+    {
+      "topic": "MC68000 effective-address and MOVE timing",
+      "pdf_pages": [
+        118,
+        119
+      ],
+      "keywords": [
+        "実効アドレス",
+        "アドレス計算",
+        "EA",
+        "MOVE"
+      ]
+    },
+    {
+      "topic": "MC68000 arithmetic and data-dependent MULU/MULS timing",
+      "pdf_pages": [
+        120
+      ],
+      "keywords": [
+        "乗算",
+        "符号なし乗算",
+        "符号付き乗算",
+        "MULU",
+        "MULS",
+        "除算"
+      ]
+    },
+    {
+      "topic": "MC68000 shift/rotate timing, LSL/LSR/ASL/ASR",
+      "pdf_pages": [
+        122
+      ],
+      "keywords": [
+        "シフト",
+        "ローテート",
+        "シフト回数",
+        "回転",
+        "LSL",
+        "ASL"
+      ]
+    },
+    {
+      "topic": "MC68000 conditional branches and DBcc timing",
+      "pdf_pages": [
+        123
+      ],
+      "keywords": [
+        "条件分岐",
+        "分岐",
+        "DBcc",
+        "Bcc",
+        "BRA",
+        "BSR",
+        "ループ"
+      ]
+    },
+    {
+      "topic": "MC68008 / MC68HC001 / MC68EC000 in 8-bit mode instruction execution times",
+      "section": "7",
+      "pdf_pages": [
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116
+      ],
+      "keywords": [
+        "8ビットバス",
+        "命令実行時間",
+        "タイミング"
+      ]
+    },
+    {
+      "topic": "MC68010 instruction times",
+      "section": "9",
+      "pdf_pages": [
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140
+      ],
+      "keywords": [
+        "命令実行時間",
+        "タイミング"
+      ]
+    }
+  ],
+  "content_guide_review": "AI-checked section headings/page positions; not human reviewed. Navigation only; verify claims against the actual pages."
+}

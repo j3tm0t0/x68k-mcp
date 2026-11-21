@@ -1,0 +1,42 @@
+{
+  "kind": "manual",
+  "language": "en",
+  "retrieved_date": "2026-11-18",
+  "license": "all-rights-reserved",
+  "usage": "reference",
+  "redistribution": "not-authorized",
+  "review_status": "unreviewed_extracted_text",
+  "issue_repository": "j3tm0t0/pix68k-dev",
+  "pagination_note": "PDFの1始まりページ位置を引用する。印刷ページの一律オフセットは設定しない。",
+  "id": "nxp-m68881-um",
+  "title": "MC68881/MC68882 Floating-Point Coprocessor User's Manual, Second Edition",
+  "publisher": "Motorola / Prentice Hall",
+  "provider": "NXP Semiconductors",
+  "document_type": "user-manual",
+  "document_number": "MC68881UM/AD",
+  "edition": "Second Edition",
+  "publication_year": 1989,
+  "url": "https://www.nxp.com/docs/en/reference-manual/MC68881UM.pdf",
+  "part_numbers": [
+    "MC68881",
+    "MC68882"
+  ],
+  "related_issues": [
+    "https://github.com/j3tm0t0/pix68k-dev/issues/210",
+    "https://github.com/j3tm0t0/pix68k-dev/issues/109"
+  ],
+  "topics": [
+    "68881",
+    "68882",
+    "FPU",
+    "FPCR",
+    "FPSR",
+    "rounding",
+    "exceptions",
+    "FSAVE",
+    "FRESTORE",
+    "coprocessor-interface"
+  ],
+  "scope_note": "MC68881/MC68882外付けFPUのプログラミング・命令・例外・コプロセッサインタフェース仕様。68040/68060内蔵FPUの未実装命令や状態フレームとは区別する。X68030の搭載構成や68881ボードのアドレスデコードは別の出典で確認する。",
+  "provenance_note": "配布ファイル名はMC68881UMだが本文は68881/68882を扱う。原本のSecond Editionと1989年を採用。"
+}

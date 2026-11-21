@@ -1,0 +1,38 @@
+{
+  "kind": "manual",
+  "language": "en",
+  "retrieved_date": "2026-11-18",
+  "license": "all-rights-reserved",
+  "usage": "reference",
+  "redistribution": "not-authorized",
+  "review_status": "unreviewed_extracted_text",
+  "issue_repository": "j3tm0t0/pix68k-dev",
+  "pagination_note": "PDFの1始まりページ位置を引用する。印刷ページの一律オフセットは設定しない。",
+  "id": "national-dp8390d",
+  "title": "DP8390D/NS32490D NIC Network Interface Controller (July 1995)",
+  "publisher": "National Semiconductor",
+  "provider": "megaburken.net (manufacturer document mirror)",
+  "document_type": "datasheet",
+  "publication_year": 1995,
+  "publication_date": "1995-07",
+  "document_number": "DP8390D/NS32490D",
+  "url": "https://megaburken.net/~patrik/DP8390D.pdf",
+  "part_numbers": [
+    "DP8390D",
+    "NS32490D"
+  ],
+  "related_issues": [
+    "https://github.com/j3tm0t0/pix68k-dev/issues/109"
+  ],
+  "topics": [
+    "Ethernet",
+    "NIC",
+    "remote-DMA",
+    "receive-ring",
+    "interrupts",
+    "registers",
+    "loopback"
+  ],
+  "scope_note": "DP8390D/NS32490Dのメーカー原本保存版。DP8390系の参照資料だが、他の互換NIC・派生品への適用は確認する。Neptune-X固有のアドレス配置・配線・ホストNAT/TAP実装の仕様そのものではない。",
+  "provenance_note": "National Semiconductorの原本。現在のメーカー配布を確認できないため保存サイトのPDFを使用。"
+}

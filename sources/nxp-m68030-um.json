@@ -1,0 +1,39 @@
+{
+  "kind": "manual",
+  "language": "en",
+  "retrieved_date": "2026-11-18",
+  "license": "all-rights-reserved",
+  "usage": "reference",
+  "redistribution": "not-authorized",
+  "review_status": "unreviewed_extracted_text",
+  "issue_repository": "j3tm0t0/pix68k-dev",
+  "pagination_note": "PDFの1始まりページ位置を引用する。印刷ページの一律オフセットは設定しない。",
+  "id": "nxp-m68030-um",
+  "title": "MC68030 Enhanced 32-Bit Microprocessor User's Manual, Third Edition",
+  "publisher": "Motorola",
+  "provider": "NXP Semiconductors",
+  "document_type": "user-manual",
+  "document_number": "MC68030UM/AD REV 2",
+  "edition": "Third Edition",
+  "publication_year": 1990,
+  "url": "https://www.nxp.com/docs/en/reference-manual/MC68030UM.pdf",
+  "part_numbers": [
+    "MC68030"
+  ],
+  "related_issues": [
+    "https://github.com/j3tm0t0/pix68k-dev/issues/210"
+  ],
+  "topics": [
+    "68030",
+    "PMMU",
+    "ATC",
+    "PTEST",
+    "PLOAD",
+    "PFLUSH",
+    "PMOVE",
+    "table-search",
+    "exceptions"
+  ],
+  "scope_note": "MC68030本体のPMMU・ATC・テーブル探索・例外仕様。MMUを持たないMC68EC030や、68040/68060のMMU形式と混同しない。X68030等のボード構成そのものの仕様とは区別する。",
+  "provenance_note": "NXPサイト上の版表示ではなく、原本の表紙 Third Edition / MC68030UM/AD REV 2 と著作権ページ1990年を採用。"
+}

@@ -1,0 +1,66 @@
+{
+  "id": "inside-x68000",
+  "title": "Inside X68000",
+  "kind": "book",
+  "language": "ja",
+  "publication_year": 1992,
+  "license": "all-rights-reserved",
+  "usage": "local-reference",
+  "redistribution": "not-authorized",
+  "review_status": "unreviewed_ocr",
+  "printed_page_offset": 4,
+  "printed_page_end": 529,
+  "pagination_note": "印刷ページは PDF ページ - 4 の推定。PDF 40 / 印刷36ほかで目視確認。全ページ未確認のため pdf_page を正とする。",
+  "content_guide": [
+    {
+      "topic": "Graphics display modes, VRAM configurations, color/page counts",
+      "pdf_pages": [
+        170,
+        171
+      ],
+      "keywords": [
+        "画面モード",
+        "解像度",
+        "VRAM",
+        "色数",
+        "ページ数",
+        "走査"
+      ]
+    },
+    {
+      "topic": "OPM/YM2151 timer A/B setting registers and period formulas",
+      "pdf_pages": [
+        275,
+        276
+      ],
+      "keywords": [
+        "OPM",
+        "YM2151",
+        "タイマA",
+        "タイマB",
+        "タイマー",
+        "タイマーA",
+        "タイマーB",
+        "周期",
+        "CLKA",
+        "CLKB"
+      ]
+    },
+    {
+      "topic": "OPM timer load, IRQ enable and overflow-flag reset",
+      "pdf_pages": [
+        277
+      ],
+      "keywords": [
+        "OPM",
+        "YM2151",
+        "割り込み",
+        "IRQ",
+        "LOAD",
+        "フラグリセット",
+        "タイマ制御"
+      ]
+    }
+  ],
+  "content_guide_review": "AI-checked section headings/page positions; not human reviewed. Navigation only; verify claims against the actual pages."
+}
