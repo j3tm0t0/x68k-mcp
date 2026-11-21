@@ -1,14 +1,16 @@
 # x68k-mcp
 
-X68000の開発・エミュレータ実装に必要な情報を、AIから出典付きで調べるためのMCPサーバーです。
+English | [日本語](README.ja.md)
 
-Inside X68000、M68000系CPU／FPUのマニュアル、周辺チップのデータシートなどを検索し、仕様の確認に使うページや表を取得できます。画面モード、命令サイクル、レジスタ、音源まわりの調査を想定しています。
+An MCP server for researching X68000 development and emulator implementation, with citations to the source manuals.
 
-**公開MCP：[`https://x68k-mcp.j3tm0t0.dev/mcp`](https://x68k-mcp.j3tm0t0.dev/mcp)**
+Search **Inside X68000**, M68000-family CPU/FPU manuals, and peripheral datasheets. Find the pages and tables behind display modes, instruction timings, register values, and audio hardware behavior.
 
-Streamable HTTP対応のMCPクライアントから利用できます。サーバーへの接続にアカウントやAPIキーは不要です。回答を生成するAIはクライアント側のものを使うため、その利用条件・料金は各クライアントに従います。
+**Public MCP endpoint: [`https://x68k-mcp.j3tm0t0.dev/mcp`](https://x68k-mcp.j3tm0t0.dev/mcp)**
 
-## 使い始める
+Connect with any MCP client that supports Streamable HTTP. No account or API key is required to access this server. Your MCP client's AI generates the answers, so its own terms and usage charges still apply.
+
+## Quick start
 
 ### Claude Code
 
@@ -17,89 +19,93 @@ claude mcp add --transport http --scope user x68k-mcp \
   https://x68k-mcp.j3tm0t0.dev/mcp
 ```
 
-登録後、Claude Codeの `/mcp` で接続状態を確認できます。`--scope user` はユーザー全体への登録です。設定方法の詳細は [Claude Code公式ドキュメント](https://code.claude.com/docs/en/mcp) を参照してください。
+Use `/mcp` in Claude Code to check the connection. `--scope user` makes the server available across your projects. See the [Claude Code MCP documentation](https://code.claude.com/docs/en/mcp) for configuration details.
 
-### その他のMCPクライアント
+### Other MCP clients
 
-| 項目 | 設定 |
+| Setting | Value |
 | --- | --- |
-| 名前 | `x68k-mcp` |
+| Name | `x68k-mcp` |
 | URL | `https://x68k-mcp.j3tm0t0.dev/mcp` |
-| トランスポート | Streamable HTTP |
-| 認証 | なし |
+| Transport | Streamable HTTP |
+| Authentication | None |
 
-クライアント固有のMCPサーバー追加画面に設定してください。MCPのURLはAPIの接続先であり、ブラウザで開く検索画面とは異なります。
+Add these settings in your client's MCP configuration. The endpoint is an API for MCP clients, rather than a browser search page.
 
-## こんな質問に
+## Example questions
 
-接続したAIに、例えば次のように聞いてみてください。
+Ask your connected AI:
 
-- 「X68000のグラフィック画面モードを、解像度・色数・ページ数・IOCS対応に分けて表にして」
-- 「MC68000の `MULU.W D0,D1` と `MULU.W (A0),D1` の最小サイクル数は？ 実効アドレス計算も含めて」
-- 「OPMのタイマBを `$80` に設定した場合の周期は？ クロック4MHzとして式も示して」
-- 「MSM6258のサンプリング周波数は、クロックと分周設定でどう変わる？」
-- 「MC68030でRESETしたとき、ATCはフラッシュされる？」
+- “List the X68000 graphics display modes, separating resolution, color depth, page count, and IOCS support.”
+- “What are the minimum cycle counts for `MULU.W D0,D1` and `MULU.W (A0),D1` on the MC68000? Include effective-address calculation time.”
+- “What is the OPM timer B period with register value `$80`, assuming a 4 MHz clock? Show the calculation.”
+- “How do the MSM6258 clock and divider settings affect its sampling rate?”
+- “Does RESET flush the ATC on the MC68030?”
 
-機種・CPU・動作条件を添えると、別世代の仕様との取り違えを減らせます。「このMCPで調べ、資料名とPDFページを付けて」と指定すると、根拠を追いやすくなります。
+Include the machine, CPU, and operating conditions to help distinguish specifications across generations. Ask the AI to **use this MCP and cite the manual title, PDF page, and relevant table** so you can check the original before using a value in code.
 
-## できること
+You can ask in English or Japanese. Some sources and annotations are in Japanese; for English answers, ask your AI client to answer in English.
 
-- 自然言語による資料検索。AWSのBedrock Managed Knowledge Baseで全文・意味のハイブリッド検索を行います。
-- 資料一覧と章・図表の案内から、対象CPUやチップに合う出典を探す。
-- 検索結果の断片に加え、出典ページの抽出テキストと注釈を取得する。
-- 対応するページでは、構造化された表の全行を取得する。
-- サイクル数やタイマ周期などを、有理数による計算ツールで検算する。
+## What it provides
 
-MCPサーバーが調査材料と計算結果を返し、接続したAIがそれらを使って回答します。
+- Natural-language search using full-text and semantic hybrid retrieval through AWS Bedrock Managed Knowledge Base.
+- A source catalog with CPU scope, chapter navigation, and structured-table locations.
+- Page text and annotations to check the context around a search result.
+- Complete structured-table rows for supported pages.
+- Exact rational arithmetic for checking instruction timings, timer periods, and other calculations.
 
-### 公開MCPのツール
+The server supplies reference material and calculation results; your connected AI uses them to write its answer.
 
-| ツール | 用途 |
+### Public MCP tools
+
+| Tool | Purpose |
 | --- | --- |
-| `verification___list_sources` | 資料一覧、対象CPU、章・構造化表の所在を確認 |
-| `managed-kb___Retrieve` | 自然言語で関連箇所を検索 |
-| `knowledge___get_page` | PDFページの抽出本文と注釈を取得 |
-| `verification___read_tables` | 対応ページの構造化表を全行取得 |
-| `verification___calculate` | 式を検算し、途中値と結果を取得 |
+| `verification___list_sources` | List references, CPU scope, chapter navigation, and available structured tables |
+| `managed-kb___Retrieve` | Search for relevant passages using natural language |
+| `knowledge___get_page` | Read a PDF page's extracted text and annotations |
+| `verification___read_tables` | Retrieve all structured-table rows for a supported page |
+| `verification___calculate` | Evaluate an expression and return intermediate and final results |
 
-目次で対象を絞り、検索で関連箇所を見つけ、ページや表で条件を確認する使い方を想定しています。計算ツールは式を計算するもので、式や単位、適用条件そのものの正しさは出典で確認します。
+The intended workflow is to locate the relevant manual, search for a passage, then check the page or table and its conditions. The calculator verifies arithmetic; formulas, units, and applicability still need to be checked against the source.
 
-## 収録資料
+## Included references
 
-2026-11-22時点で12資料、PDF 3,229ページとWebメモ1件を収録しています。
+As of November 22, 2026: **12 references, covering 3,229 PDF pages and one set of web notes.**
 
-| 分野 | 資料 |
+| Area | References |
 | --- | --- |
-| X68000本体 | Inside X68000 |
-| 68000系命令・基本CPU | M68000 Family Programmer’s Reference Manual、MC68000 User’s Manual |
-| 68030・MMU | MC68030 User’s Manual |
-| 68060 | MC68060 User’s Manual、追補、デバイスエラッタ |
+| X68000 hardware | Inside X68000 |
+| 68000-family instructions and base CPU | M68000 Family Programmer’s Reference Manual; MC68000 User’s Manual |
+| 68030 and MMU | MC68030 User’s Manual |
+| 68060 | MC68060 User’s Manual, addendum, and device errata |
 | FPU | MC68881/MC68882 User’s Manual |
 | ADPCM | OKI MSM6258 |
-| シリアル | Zilog SCC資料（Z8530系） |
-| ネットワーク | National DP8390D |
-| 拡張ハードウェア | GORRY氏のTS-6BGA開発ページに基づくWebメモ |
+| Serial communications | Zilog SCC documentation for the Z8530 family |
+| Networking | National DP8390D |
+| Expansion hardware | Technical notes based on GORRY’s TS-6BGA development page |
 
-出典URL、文書の版、CPUの適用範囲などは [`sources/`](sources/) に記録しています。[部品資料の詳細](docs/issue-references.md)・[TS-6BGAメモ](docs/ts6bga.md)
+Source URLs, document revisions, and CPU scope are recorded in [`sources/`](sources/). See the [peripheral reference notes](docs/issue-references.md) and [TS-6BGA notes](docs/ts6bga.md) for details (Japanese).
 
-## 出典と回答品質
+## Citations and answer quality
 
-出典のPDFページは**1始まりのPDF上の位置**です。紙面に印刷されたページ番号とは異なる場合があります。手元の原本を確認するときは、この違いに注意してください。Webメモは元ページのURLを出典にします。
+Citations can identify the **manual, PDF page, and relevant table**, rather than just the document. For example, MC68000 `MULU.W` timing is covered by **Table 8-4, PDF p.120**, with effective-address timing in **Table 8-1, PDF p.118** of the MC68000 User’s Manual.
 
-OCR・抽出テキストには誤りがあり、全ページの校正は終わっていません。画面モードや命令サイクルなど優先度の高い表から構造化を進めており、現在は7ページ・10表です。これらはAIによる原本画像との照合で、人手による校正済みとは区別しています。[表の構造化](docs/structured-tables.md)
+PDF pages are **1-based positions in the PDF file** and may differ from the printed page numbers. Web notes cite the original URL. How citations are displayed or linked depends on your MCP client and the source.
 
-品質確認では、LLMが実際に本番MCPを呼んで回答し、別の上位モデルが正確さ・根拠・網羅性・実用性・満足度を採点します。代表19問と条件を変えた追加2問の最新回答は、全5項目で4点満点でした。選定したケースの結果であり、初回成功率や未知の質問全般の正確さを示すものではありません。以前の失敗も記録しています。[改善内容と検証範囲](docs/aws-native-quality.md)
+Extracted text and OCR can contain errors; the full collection has not been proofread. Structured annotations currently cover **10 tables across 7 pages**, prioritizing display modes, instruction timings, and other useful hardware details. These have been checked against page images by AI, which is distinct from human proofreading. See [structured tables](docs/structured-tables.md) (Japanese).
 
-レジスタの番地・ビット位置、数値、コードを実装に使う際は、対象機種・CPU・資料の版と原本を確認してください。資料にない条件は、確認できない範囲として扱います。
+Quality evaluation uses an LLM to call the production MCP and answer a question, then a separate, more capable model to grade accuracy, grounding, completeness, usefulness, and satisfaction. The latest answers for 19 representative questions and 2 questions with changed conditions scored 4/4 in all five categories. These are results for selected cases, not a first-attempt success rate or an accuracy claim for arbitrary questions. Earlier failures are retained. See the [evaluation results and scope](docs/aws-native-quality.md) (Japanese).
 
-## ローカルで動かす
+Before using a register address, bit position, numeric value, or code in an implementation, check the original reference, its revision, and the applicable CPU or machine.
 
-自分で用意した資料を取り込み、SQLite FTS5による全文検索とstdio MCPを動かせます。公開AWSネイティブ版とはツール構成が異なります。
+## Run locally
 
-Python 3.11以上、[uv](https://docs.astral.sh/uv/)、Popplerの `pdftotext`、FTS5 trigram対応SQLiteが必要です。
+You can ingest your own references and run SQLite FTS5 full-text search with a stdio MCP server. Its tool set differs from the public AWS-native service.
+
+Requirements: Python 3.11+, [uv](https://docs.astral.sh/uv/), Poppler's `pdftotext`, and SQLite with FTS5 trigram support.
 
 ```sh
-# macOSでPopplerが未導入の場合
+# macOS, if Poppler is not installed
 brew install poppler
 
 uv sync --locked
@@ -111,33 +117,35 @@ uv run --no-sync x68k-knowledge search 'DMAC'
 uv run --no-sync x68k-knowledge serve --db data/knowledge.sqlite3
 ```
 
-`serve` はstdio接続用です。通常はMCPクライアントから起動します。原本PDFや検索DBはリポジトリに含まれていないので、クローン直後に公開サービスと同じデータが揃うわけではありません。
+`serve` uses stdio and is normally launched by your MCP client. Original PDFs and search databases are not included in this repository, so cloning it does not give you the public service's corpus.
 
-複数資料の取り込み、公式PDFの取得例、stdio接続設定は [ローカル開発手順](docs/local-development.md) を参照してください。`index` は指定した全コーパスからDBを置き換えるため、追加時も収録するコーパスをすべて指定します。
+See the [local development guide](docs/local-development.md) (Japanese) for multiple-source ingestion, official PDF download examples, and stdio configuration. `index` replaces the database using all specified corpora; include every corpus you want to keep when rebuilding.
 
-## 開発・運用
+## Development and deployment
 
 ```sh
 uv sync --locked
 make test
 ```
 
-通常テストはオフラインで、有料モデルや本番MCPを呼びません。実LLMによる品質確認は明示的な手動実行に分け、呼び出し間隔と実行件数を制限しています。[評価方法](docs/quality-evaluation.md)
+Regular tests run offline and do not call paid models or the production MCP. Live LLM evaluation is a separate, explicit operation with limits on request frequency and case count. See [quality evaluation](docs/quality-evaluation.md) (Japanese).
 
-| ドキュメント | 内容 |
+The detailed guides below are currently in Japanese.
+
+| Guide | Contents |
 | --- | --- |
-| [AWSネイティブ版](docs/aws-native.md) | 公開MCP、取り込み、CloudFront、ワイルドカード証明書 |
-| [AWS Lambda＋SQLite版](docs/aws.md) | 同じ全文検索データを使う比較用実装 |
-| [取り込みの優先度](docs/priority-assessment.md) | 構造化する資料・表の選び方と残る課題 |
-| [データ設計](docs/knowledge-plan.md) | 収録方針と拡張候補 |
-| [公開repoの範囲](docs/repository-layout.md) | 含めるファイルと非公開データの区別 |
+| [AWS-native MCP](docs/aws-native.md) | Public MCP, ingestion, CloudFront, and certificates |
+| [AWS Lambda + SQLite](docs/aws.md) | Read-only page retrieval used by the native MCP |
+| [Ingestion priorities](docs/priority-assessment.md) | How references and tables are selected; remaining work |
+| [Data design](docs/knowledge-plan.md) | Coverage and expansion plans |
+| [Repository scope](docs/repository-layout.md) | Public files and locally managed data |
 
-## 資料の取り扱い
+## Reference material
 
-このリポジトリには、原本PDF、抽出全文、検索DB、APIキーを含めません。`books/`・`data/`・`tmp/`・`.env` はGit対象外です。資料は各自、利用条件を確認して用意してください。
+This repository does not include original PDFs, extracted full text, search databases, or API keys. `books/`, `data/`, `tmp/`, and `.env` are excluded from Git. Obtain references separately and check their usage conditions.
 
-各資料の権利はそれぞれの権利者に帰属します。利用条件は出典ごとに確認してください。メーカー公開資料やWeb上の情報を、公開されていることだけで自由に再配布できるものとは扱いません。[資料・公開データの扱い](docs/content-policy.md)
+Rights in source materials remain with their respective rights holders. Manufacturer PDFs and material available on the web are not assumed to be freely redistributable. See the [reference material policy](docs/content-policy.md) (Japanese).
 
-## ライセンス
+## License
 
-コードは [MIT License](LICENSE)。出典資料そのものの権利・利用条件はこのライセンスに含まれません。構造化注釈、資料メタデータ、評価データの位置付けは [NOTICE.md](NOTICE.md) を参照してください。個人環境の設定や稼働中サービスの管理情報は公開ファイルに含めません。
+The code is available under the [MIT License](LICENSE). This license does not grant rights to the source manuals themselves. See [NOTICE.md](NOTICE.md) (Japanese) for the distinction between software, reference metadata, structured annotations, and evaluation data. Personal deployment settings and operational identifiers are kept outside the public repository.
