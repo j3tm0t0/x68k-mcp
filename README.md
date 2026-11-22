@@ -52,6 +52,7 @@ You can ask in English or Japanese. Some sources and annotations are in Japanese
 - A source catalog with CPU scope, chapter navigation, and structured-table locations.
 - Page text and annotations to check the context around a search result.
 - Complete structured-table rows for supported pages.
+- Separate [unofficial Inside X68000 errata](https://kg68k.github.io/InsideX68000-errata/InsideX68000.html) references and selected reviewed corrections, retaining edition and machine-specific conditions.
 - Exact rational arithmetic for checking instruction timings, timer periods, and other calculations.
 
 The server supplies reference material and calculation results; your connected AI uses them to write its answer.

@@ -73,3 +73,21 @@ aws cloudformation deploy \
 Managed KB、Gateway、S3、Lambda、CloudFront、DNS等にはそれぞれ料金が発生する。利用量と最新料金を確認する。[Bedrock料金](https://aws.amazon.com/bedrock/pricing/)
 
 [Managed Knowledge Base](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html)、[Custom connector](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-ds-custom.html)、[標準MCPコネクター](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/gateway-target-connector-managed-kb.html)
+
+## Optional reference enrichment release
+
+Reviewed reference updates are packaged separately from source data. The deployment code is in `aws/reference_release.py` and `aws/errata_runtime/`; private datasets and release descriptors stay under the ignored `data/` and `tmp/` directories. Packages have deterministic hashes and immutable S3 keys.
+
+`aws.managed_gateway --reference-release PATH` installs a prepared private release descriptor. Later deployments retain the descriptor saved in `tmp/bedrock-managed/deployment.json` and preserve the current runtime switch value. The existing Gateway, public URL, tool schemas and request limits remain in place.
+
+The release starts **disabled**. A single SSM parameter selects the behavior on each invocation, without an application cache. Disabled mode delegates verification to a saved immutable Lambda version, returns the original page results, leaves native retrieval results unchanged, and restores the previous initialization instructions. Failure to read the parameter also selects disabled behavior. This is an application rollback; it does not require rebuilding code or changing CloudFront.
+
+```sh
+# Enable after checking the disabled mode through the public MCP URL.
+uv run --no-sync python -m aws.reference_release --enable
+
+# Restore baseline behavior without rebuilding or redeploying.
+uv run --no-sync python -m aws.reference_release --disable
+```
+
+The switch uses the AWS profile and region in the local deployment state. AWS propagation and in-flight requests mean this is not a guarantee of an instantaneous global cutover. Check the returned metadata after switching. Keep the pre-release CloudFormation template as the infrastructure rollback option.

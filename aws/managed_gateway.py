@@ -98,17 +98,28 @@ def configure_agentic(stack,enabled):
 
 
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--verification',action='store_true');parser.add_argument('--agentic',action=argparse.BooleanOptionalAction,default=None);args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--verification',action='store_true');parser.add_argument('--agentic',action=argparse.BooleanOptionalAction,default=None);parser.add_argument('--reference-release',type=Path,help='Private release descriptor; persisted for subsequent deployments');args=parser.parse_args()
     out=ROOT/'tmp/bedrock-managed';state=json.loads((out/'deployment.json').read_text())
     stack='x68k-knowledge-native-mcp';check_stack_owner(state['profile'],state['region'],stack)
     if args.verification or state.get('verification'):check_stack_owner(state['profile'],state['region'],'x68k-knowledge-aws')
     path=out/'gateway-stack.json';enabled_agentic=state.get('agentic',False) if args.agentic is None else args.agentic
     generated=add_verification(template(state)) if args.verification or state.get('verification') else template(state)
-    path.write_text(json.dumps(configure_agentic(generated,enabled_agentic)))
+    generated=configure_agentic(generated,enabled_agentic)
+    release=json.loads(args.reference_release.read_text()) if args.reference_release else state.get('reference_release')
+    if release:
+        from aws.reference_release import add_reference_release
+        if not args.reference_release:
+            release['feature_flag_value']=json.loads(run_aws(state['profile'],state['region'],'ssm','get-parameter','--name',release['flag_name']))['Parameter']['Value']
+        generated=add_reference_release(generated,release)
+    path.write_text(json.dumps(generated))
     run_aws(state['profile'],state['region'],'cloudformation','deploy','--stack-name',stack,'--template-file',str(path),'--capabilities','CAPABILITY_IAM','--s3-bucket',state['Bucket'],'--s3-prefix','cloudformation/native-gateway','--tags','Project=x68k-mcp','--no-fail-on-empty-changeset',capture=False)
     outputs=json.loads(run_aws(state['profile'],state['region'],'cloudformation','describe-stacks','--stack-name',stack,'--query','Stacks[0].Outputs'))
     state.update({o['OutputKey']:o['OutputValue'] for o in outputs});state['verification']=args.verification or state.get('verification',False);state['agentic']=enabled_agentic
-    (out/'deployment.json').write_text(json.dumps(state,indent=2));print(json.dumps(state),flush=True)
+    if release:state['reference_release']=release
+    (out/'deployment.json').write_text(json.dumps(state,indent=2))
+    summary={k:v for k,v in state.items() if k!='reference_release'}
+    if release:summary['reference_release']={k:release[k] for k in ['data_version','sha256','flag_name','feature_flag_value']}
+    print(json.dumps(summary),flush=True)
 
 
 if __name__=='__main__':main()
